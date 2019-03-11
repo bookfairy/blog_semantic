@@ -25,17 +25,21 @@
 
         <section class="ui center aligned container">
             <div class="ui buttons">
-                <a class="ui labeled icon {% if post.id|add:"-1" == 0 %}disabled{% endif %} button"
+              {% if post.get_previous_by_created_at %}
+                <a class="ui labeled icon button"
                    href="{% url "blog:detail" post.id|add:"-1" %}">
                     <i class="left chevron icon"></i>이전 글
                 </a>
+              {% endif %}
                 <a class="ui button" href="{% url "blog:home" %}">
                     <i class="list ul icon"></i>목록
                 </a>
+              {% if post.get_next_by_created_at %}
                 <a class="ui right labeled icon button"
                    href="{% url "blog:detail" post.id|add:"1" %}">
                     <i class="right chevron icon"></i>다음 글
                 </a>
+              {% endif %}
             </div>
         </section>
     </main>
